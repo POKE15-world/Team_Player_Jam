@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /// <summary>
@@ -12,7 +13,7 @@ public class PlayerPickUpObject : MonoBehaviour {
     public Transform pickupPoint;         // Where the object will be held
     public float pickupRadius = 0.5f;    // How far the player can reach to pick up
     public float throwForce = 3f;        // How strong the throw is
-    public SpriteRenderer spriteRender;  // Shows if the player can pick somehting up
+    public TextMeshPro spriteRender;  // Shows if the player can pick somehting up
     
     [Header("Player Key Bind")]
     public KeyCode keyBind = KeyCode.P;

@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Garbage
+  - Recyclables
+  - Compostables
   layers:
   - Default
   - TransparentFX

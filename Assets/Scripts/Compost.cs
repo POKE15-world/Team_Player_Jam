@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Scripting;
 
-public class TrashCan : MonoBehaviour
+public class Compost : MonoBehaviour
 {
     ThrowableBounds throwable;
-    public string Tag = "Garbage";
+    public string Tag = "Compostables";
     // Start is called before the first frame update
     void Start()
     {
@@ -18,7 +18,7 @@ public class TrashCan : MonoBehaviour
     {
     }
     private void OnTriggerEnter2D(Collider2D other)
-    { 
+    {
         if (other.CompareTag(Tag))
         {
             throwable.MoveToPerimeter();
@@ -27,5 +27,5 @@ public class TrashCan : MonoBehaviour
     }
 }
 
-    
+
 

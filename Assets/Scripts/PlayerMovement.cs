@@ -6,56 +6,92 @@ using UnityEngine;
 /// Handles 2D player movement and rotation based on input.
 /// Supports two players with separate input axes.
 /// </summary>
-public class PlayerMovement : MonoBehaviour {
+public class PlayerMovement : MonoBehaviour
+{
     private Rigidbody2D _rb;
 
     [Header("Player Settings")]
-    public bool isPlayerOne = true;   // True if this is player 1, false for player 2
-    public float xSpeed = 3f;         // Horizontal movement speed
-    public float ySpeed = 3f;         // Vertical movement speed
-    
-    // Called when the game starts
-    private void Start() { _rb = GetComponent<Rigidbody2D>(); }
+    public bool isPlayerOne = true;
+    public float xSpeed = 3f;
+    public float ySpeed = 3f;
 
-    // Called once per frame
-    private void FixedUpdate() {
+    [Header("Boost Settings")]
+    public float boostMultiplier = 2f;       // How much faster during boost
+    public float boostDuration = 2f;         // How long the boost lasts
+    public float boostCooldown = 5f;         // Time before boost can be used again
+    public KeyCode boostKeyP1 = KeyCode.LeftShift;
+    public KeyCode boostKeyP2 = KeyCode.RightShift;
+
+    private float boostTimer = 0f;
+    private float cooldownTimer = 0f;
+    private bool isBoosting = false;
+
+    private void Start()
+    {
+        _rb = GetComponent<Rigidbody2D>();
+    }
+
+    private void FixedUpdate()
+    {
+        // Handle boost timing
+        if (isBoosting)
+        {
+            boostTimer -= Time.fixedDeltaTime;
+            if (boostTimer <= 0f)
+            {
+                isBoosting = false;
+                cooldownTimer = boostCooldown;
+            }
+        }
+        else if (cooldownTimer > 0f)
+        {
+            cooldownTimer -= Time.fixedDeltaTime;
+        }
+
         // Get player input
         float xInput = 0f;
         float yInput = 0f;
+        bool boostPressed = false;
 
-        if (isPlayerOne) {
+        if (isPlayerOne)
+        {
             xInput = Input.GetAxis("Horizontal_P1");
             yInput = Input.GetAxis("Vertical_P1");
+            boostPressed = Input.GetKeyDown(boostKeyP1);
         }
-        else {
+        else
+        {
             xInput = Input.GetAxis("Horizontal_P2");
             yInput = Input.GetAxis("Vertical_P2");
+            boostPressed = Input.GetKeyDown(boostKeyP2);
         }
 
-        // Apply movement to the Rigidbody
-        _rb.velocity = new Vector2(xInput * xSpeed, yInput * ySpeed);
+        // Activate boost if available
+        if (boostPressed && cooldownTimer <= 0f && !isBoosting && !isPlayerOne)
+        {
+            isBoosting = true;
+            boostTimer = boostDuration;
+        }
 
-        // Rotate the player to face the direction of movement
+        // Apply movement
+        float currentXSpeed = isBoosting ? xSpeed * boostMultiplier : xSpeed;
+        float currentYSpeed = isBoosting ? ySpeed * boostMultiplier : ySpeed;
+        _rb.velocity = new Vector2(xInput * currentXSpeed, yInput * currentYSpeed);
+
+        // Rotate the player to face movement direction
         Vector2 movement = new Vector2(xInput, yInput);
-        if (movement != Vector2.zero) {
-            // Calculate the angle in degrees (0° = up, clockwise rotation)
+        if (movement != Vector2.zero)
+        {
             float angle = Mathf.Atan2(movement.y, movement.x) * Mathf.Rad2Deg;
-
-            // Adjust so that 0° points up
             angle -= 90f;
-
-            // Snap the rotation to the nearest 45 degrees for 8-directional movement
             float snappedAngle = Mathf.Round(angle / 45f) * 45f;
-
-            // Apply rotation to the player
             transform.rotation = Quaternion.Euler(0, 0, snappedAngle);
         }
     }
 
-    /// <summary>
-    /// Returns the player's current velocity
-    /// </summary>
-    public Vector2 GetVelocity() {
+    public Vector2 GetVelocity()
+    {
         return _rb.velocity;
     }
 }
+

@@ -534,6 +534,11 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!212 &546494473 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6098351854869530729, guid: 80d41af0af61b064cbb8e1dc7b687d74, type: 3}
+  m_PrefabInstance: {fileID: 1296116699}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &583305865
 GameObject:
   m_ObjectHideFlags: 0
@@ -817,6 +822,53 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!1 &729185717
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 729185718}
+  - component: {fileID: 729185719}
+  m_Layer: 0
+  m_Name: timer obeject
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &729185718
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729185717}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1028537450}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &729185719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 729185717}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 878cf07618cbda34b88f9ce7ba72e1f7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timeRemaining: 300
+  timerIsRunning: 0
+  timeText: {fileID: 1181742253}
 --- !u!1 &844011809
 GameObject:
   m_ObjectHideFlags: 0
@@ -1140,10 +1192,9 @@ GameObject:
   m_Component:
   - component: {fileID: 1181742252}
   - component: {fileID: 1181742255}
-  - component: {fileID: 1181742254}
   - component: {fileID: 1181742253}
   m_Layer: 5
-  m_Name: Text (TMP)
+  m_Name: Timer Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1257,21 +1308,6 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
---- !u!114 &1181742254
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1181742251}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 878cf07618cbda34b88f9ce7ba72e1f7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  timeRemaining: 300
-  timerIsRunning: 0
-  timeText: {fileID: 1181742253}
 --- !u!222 &1181742255
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1564,6 +1600,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: -0.41
       objectReference: {fileID: 0}
+    - target: {fileID: 8719248342655987234, guid: 80d41af0af61b064cbb8e1dc7b687d74, type: 3}
+      propertyPath: spriteRender
+      value: 
+      objectReference: {fileID: 546494473}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1870,8 +1910,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 8865636960069502952, guid: 5c38f928cd2a0164b85e1be60f1d6a2c, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 729185718}
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 1867259228102025027, guid: 5c38f928cd2a0164b85e1be60f1d6a2c, type: 3}
+      insertIndex: 1
+      addedObject: {fileID: 1620708827}
   m_SourcePrefab: {fileID: 100100000, guid: 5c38f928cd2a0164b85e1be60f1d6a2c, type: 3}
 --- !u!1 &1540285469 stripped
 GameObject:
@@ -1888,6 +1934,23 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 54f71f10b24acb747b16f9f8183a77ab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1620708822 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1867259228102025027, guid: 5c38f928cd2a0164b85e1be60f1d6a2c, type: 3}
+  m_PrefabInstance: {fileID: 1524269443}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1620708827
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1620708822}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2c8f735ce4560945bc26736d0d27c6d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!1001 &1646297839
